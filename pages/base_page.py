@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
 
 class BasePage:
-    def __init__(self, browser, link, timeout=0):
+    def __init__(self, browser, link, timeout=2):
         self.browser = browser
         self.link = link
         self.browser.implicitly_wait(timeout)
@@ -31,9 +31,13 @@ class BasePage:
             return True
         return False
 
+    def go_to_basket_page(self):
+        basket_button = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        basket_button.click()
+
     def go_to_login_page(self):
-        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
-        link.click()
+        login_button = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_button.click()
 
     def open(self):
         self.browser.get(self.link)
