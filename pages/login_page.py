@@ -1,8 +1,20 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
+import pytest
+import time
 
 class LoginPage(BasePage):
+    def register_new_user(self, email, password):
+        # email = str(time.time()) + "@fakemail.org"
+        # password = str(time.time())
+        self.email = email
+        self.password = password
+        self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL_INPUT).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_INPUT_1).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_INPUT_2).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON).click()
+
     def should_be_login_page(self):
         self.should_be_login_url()
         self.should_be_login_form()
