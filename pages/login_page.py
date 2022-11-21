@@ -1,13 +1,9 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
-import pytest
-import time
 
 class LoginPage(BasePage):
     def register_new_user(self, email, password):
-        # email = str(time.time()) + "@fakemail.org"
-        # password = str(time.time())
         self.email = email
         self.password = password
         self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL_INPUT).send_keys(email)
